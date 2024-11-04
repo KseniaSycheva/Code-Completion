@@ -10,15 +10,25 @@ def create_completion_examples_single_file(
         dataset: dict[str, list[str]],
         n_lines_prefix_suffix: int
 ) -> dict[str, list[str]]:
+    """Create single-line completion examples for a file.
+
+    :param file_path: path to file.
+    :param dataset: dictionary to store new examples at.
+    :param n_lines_prefix_suffix: number of lines to use in prefix and suffix (~context length).
+    :return: updated data dictionary.
+    """
 
     with open(file_path) as fp:
         content = fp.readlines()
 
     content = list(filter(lambda x: len(x) > 5, content))
 
+    # ensure that masked line is not the last one
     if len(content) % 2 == 0:
         content = content[:-1]
 
+    # create examples such that masked lines are not present in other examples
+    # not necessary for inference, but can be important for training
     skipped_lines_indices = [i for i in range(n_lines_prefix_suffix, len(content), n_lines_prefix_suffix + 1)]
 
     for i in skipped_lines_indices:
@@ -34,6 +44,13 @@ def create_completion_examples_directory(
         n_examples: int,
         n_lines_prefix_suffix: int
 ) -> Dataset:
+    """Traverses project directory and creates examples from .py files.
+
+    :param path_to_dir: path to root directory.
+    :param n_examples: max number of examples to save in a dataset.
+    :param n_lines_prefix_suffix: number of lines to use in prefix and suffix.
+    :return: hf dataset with code completion examples.
+    """
     dataset: dict[str, list[str]] = {"prefix": [], "suffix": [], "reference": []}
 
     for dir_name, _, file_names in os.walk(path_to_dir):
@@ -47,6 +64,13 @@ def create_completion_examples_directory(
 
 
 def visualize_examples(dataset: Dataset, n_examples: int):
+    """Prints several examples from created dataset.
+
+    Can be useful for visual debugging.
+
+    :param dataset: created dataset.
+    :param n_examples: number of examples to print.
+    """
     for i in range(n_examples):
         print(dataset[i]["prefix"])
         print("===="*5)

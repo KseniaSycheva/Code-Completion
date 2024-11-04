@@ -29,8 +29,10 @@ Other arguments:
 - n-examples: number of examples to use in evaluation
 - quantize: whether to load model in 8-bit (when used in colab, recommended for models with # params >= 7b)
 
-Completion examples for CodeLlama-7b-Instruct-hf are available [here](examples.txt). 
-To replicate results, it is recommended to run [notebook](code_completion.ipynb) in colab. 
+Completion examples for CodeLlama-7b-Instruct-hf are available [here](examples.txt). <br>
+Authors also released [Code Llama for Python](https://huggingface.co/codellama/CodeLlama-7b-Python-hf). It was not used here, since authors mention in the paper that it does not have infilling capabilities. <br> 
+To replicate results, it is recommended to run [notebook](code_completion.ipynb) in colab. <br> 
+Note that generation parameters used in code and notebook make model non-deterministic, so outputs will not match exactly. 
 
 ## Evaluation
 The following metrics are used: 
