@@ -1,0 +1,88 @@
+PROMPT: <s> <PRE><SUF> from torch.utils.data import DataLoader
+from transformers import (
+    AutoTokenizer,
+    AutoModelForCausalLM,
+    default_data_collator,
+ <MID> import argparse
+import math
+import os
+import yaml
+from tqdm import tqdm
+
+====================
+REFERENCE: import torch
+
+====================
+PREDICTED: from datetime import datetime
+
+
+PROMPT: <s> <PRE><SUF> from accelerate import Accelerator, DistributedDataParallelKwargs, InitProcessGroupKwargs
+from src.data import load_data
+from src.tokenizer import AudioTokenizer, get_start_tokens
+from src.utils import save_checkpoint, fix_checkpoint, get_exp_name
+# Parse arguments
+ <MID> from torch.utils.data import DataLoader
+from transformers import (
+    AutoTokenizer,
+    AutoModelForCausalLM,
+    default_data_collator,
+
+====================
+REFERENCE:     get_scheduler,
+
+====================
+PREDICTED: DataCollatorForLanguageModeling,
+
+
+PROMPT: <s> <PRE><SUF> parser.add_argument(
+    "--config", type=str, help="Path to the config.yaml file", required=True
+args = parser.parse_args()
+# Load config
+with open(args.config, "r") as file:
+ <MID> from accelerate import Accelerator, DistributedDataParallelKwargs, InitProcessGroupKwargs
+from src.data import load_data
+from src.tokenizer import AudioTokenizer, get_start_tokens
+from src.utils import save_checkpoint, fix_checkpoint, get_exp_name
+# Parse arguments
+
+====================
+REFERENCE: parser = argparse.ArgumentParser(description="Train a model with configuration.")
+
+====================
+PREDICTED: from pathlib import Path
+
+
+PROMPT: <s> <PRE><SUF> base_model = config["base_model"]
+checkpoint_path = config.get("checkpoint_path")
+save_dir = config["save_dir"]
+data = config["data"]
+start_audio_token = config["start_audio_token"]
+ <MID> parser.add_argument(
+    "--config", type=str, help="Path to the config.yaml file", required=True
+args = parser.parse_args()
+# Load config
+with open(args.config, "r") as file:
+
+====================
+REFERENCE:     config = yaml.safe_load(file)
+
+====================
+PREDICTED: config = yaml.load(file)
+
+
+PROMPT: <s> <PRE><SUF> path_to_cache = config["path_to_cache"]
+checkpointing_steps = int(config['checkpointing_steps'])
+max_grad_norm = float(config['max_grad_norm'])
+torch.backends.cuda.matmul.allow_tf32 = config["allow_tf32"]
+torch.backends.cudnn.allow_tf32 = config["allow_tf32"]
+ <MID> base_model = config["base_model"]
+checkpoint_path = config.get("checkpoint_path")
+save_dir = config["save_dir"]
+data = config["data"]
+start_audio_token = config["start_audio_token"]
+
+====================
+REFERENCE: end_audio_token = config["end_audio_token"]
+
+====================
+PREDICTED: end_audio_token = config["end_audio_token"]

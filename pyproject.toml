@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "code-completion"
+version = "0.1.0"
+description = "Code-completion assigment"
+authors = ["Ksenia Sycheva <k.sycheva@student.tudelft.nl>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.9"
+datasets = "^3.1.0"
+transformers = "^4.46.1"
+torch = "^2.5.1"
+evaluate = "^0.4.3"
+sacrebleu = "^2.4.3"
+rouge_score = ""
+bert_score = ""
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
